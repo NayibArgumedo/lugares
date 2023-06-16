@@ -1,28 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Lista de Departamentos</h1>
+{% extends 'base.html' %}
+{% block title %} Lista de Departamentos {% endblock %}
+
+{% block title_content  %}
+
+Lista de Departamento
+
+{%  endblock %}
 
 
-    <ul>
+    {% block content  %}
+        <ul>
 
-        {% for department in list_department %}
-      
-        <li>
+            {% for department in list_department %}
+        
+            <li>
+                <a href="{% url 'app:ciudades'  department%}">{{ department }}</a>
+                
+            </li>
+            {% endfor %}     
+        </ul>
 
-            {{ department }}
-
-        </li>
-        {% endfor %}     
-    </ul>
-</body>
-</html>
-   
-
+    
+    {%  endblock %}
 

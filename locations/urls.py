@@ -22,8 +22,9 @@ app_name = "app"
 urlpatterns = [
     path('', views.index),
     path('Departamentos', views.Departamentos),
-    path('Departamentos/<str:name_department>', views.ciudades),
-    path('Departamentos/<str:name_department>/<str:name_city>', views.barrios),
+    path('Departamentos/<str:name_department>', views.ciudades, name='ciudades'),
+    path('Departamentos/<str:name_department>/<str:name_city>', views.barrios, name='barrios'),
+    path('locations', views.todo),
     path('Departamentos/Ciudades/<int:department_id>', views.list_city),
     path('Prueba<int:department_id>', views.list_city2)
     

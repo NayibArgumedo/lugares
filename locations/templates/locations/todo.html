@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %} Tabla de Lugares {% endblock %}
+
+{% block title_content  %}
+
+Tabla de Lugares
+
+{%  endblock %}
+
+    {% block content  %}
+
+    <table>
+        <tr>
+            <th>Departamento</th>
+            <th>Ciudad</th>
+            <th>Barrio</th>
+        </tr>  
+        {% for lugar in datos %} 
+        <tr>
+            <td>{{ lugar.0 }}</td>
+            <td>{{ lugar.1 }}</td>
+            <td>{{ lugar.2 }}</td>
+        </tr>  
+        {% endfor %}      
+    </table>
+    {%  endblock %}
+    

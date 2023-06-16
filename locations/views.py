@@ -24,76 +24,6 @@ def Departamentos(request):
     return render(request, template_name, context)
 
 
-def list_city(request, department_id):
-    template_name = 'locations/city_list.html'
-    cities = City.objects.filter(department_id=department_id).first()
-    cities2= City.objects.filter(department_id=department_id)
-    lista_ciudades = [ ]
-    departamento = "{}".format(cities.department)
-    
-
-    for citys in cities2:
-                name_citys = "{}".format(citys.nameCity)
-                lista_ciudades.append(name_citys)
-
-
-
-
-    context = {
-                "lista_ciudades": lista_ciudades,
-                "departamento": departamento
-    }
-        
-
-
-
-    return render(request, template_name, context)
-    
-
-    
-
-
-
-
-
-def list_city2(request, department_id):
-
-
-
-    
-    template_name = 'locations/city_list.html'
-
-
-    cities = City.objects.filter(department_id=department_id).first() # select * from city where departamento = departamento
-    cities2= City.objects.filter(department_id=department_id)
-    lista_ciudades=[ ]
-    for citys in cities2 :
-            name_citys = """ {} """.format(citys.nameCity)
-            lista_ciudades.append(name_citys)
-
-    
-  
-    if cities:
-        # print("estoy en el if")
-        # print(lista_ciudades)
-        # print("despues de la lista")
-        
-        texto_respuesta= """
-
-            <h1> Departamento de : {} </h1>    
-            <ul> Ciudades:
-                <li>
-                    {}
-                </li>
-            </ul>
-        """.format(cities.department, lista_ciudades )
-        
-    else:
-        texto_respuesta = """no se encuentras registros de  {}""".format(department_id)
-    
-    return HttpResponse(texto_respuesta)
-
-
 def ciudades(request, name_department):
 
     template_name = 'locations/Cuidades.html'
@@ -119,11 +49,9 @@ def ciudades(request, name_department):
 def barrios(request, name_department, name_city):
 
     template_name = 'locations/Barrios.html'
-    
     departamento = Department.objects.filter(namedepartment=name_department).first()
 
     if departamento :
-
         ciudad = City.objects.filter(nameCity= name_city, department=departamento).first()
 
         if ciudad :
@@ -135,20 +63,87 @@ def barrios(request, name_department, name_city):
                 "barrio" : barrio
             }
         else:
-
             context = {
                 "display" : False,
-
             }
     else:
-
         context = {
             "display" : False,
-
         }
 
+    return render(request, template_name, context)
 
+
+def todo(request):
+
+    template_name = 'locations/todo.html'
+
+    datos =[]
+    departamentos = Department.objects.all()
+
+    for departamento in departamentos:
+        ciudades = City.objects.filter(department=departamento.id)
+
+        for ciudad in ciudades:
+            barrios = Neighborhood.objects.filter(city=ciudad.id)
+
+            for barrio  in barrios:
+                datos.append([departamento.namedepartment, ciudad.nameCity, barrio.nameNeighborhood])
+
+
+    context = {
+        'datos': datos
+    }
 
     return render(request, template_name, context)
         
 
+def list_city(request, department_id):
+    template_name = 'locations/city_list.html'
+    cities = City.objects.filter(department_id=department_id).first()
+    cities2= City.objects.filter(department_id=department_id)
+    lista_ciudades = [ ]
+    departamento = "{}".format(cities.department)
+    
+    for citys in cities2:
+                name_citys = "{}".format(citys.nameCity)
+                lista_ciudades.append(name_citys)
+
+    context = {
+                "lista_ciudades": lista_ciudades,
+                "departamento": departamento
+    }
+
+    return render(request, template_name, context)
+    
+
+
+def list_city2(request, department_id):
+    template_name = 'locations/city_list.html'
+
+    cities = City.objects.filter(department_id=department_id).first() # select * from city where departamento = departamento
+    cities2= City.objects.filter(department_id=department_id)
+    lista_ciudades=[ ]
+    for citys in cities2 :
+            name_citys = """ {} """.format(citys.nameCity)
+            lista_ciudades.append(name_citys)
+  
+    if cities:
+        # print("estoy en el if")
+        # print(lista_ciudades)
+        # print("despues de la lista")
+        
+        texto_respuesta= """
+
+            <h1> Departamento de : {} </h1>    
+            <ul> Ciudades:
+                <li>
+                    {}
+                </li>
+            </ul>
+        """.format(cities.department, lista_ciudades )
+        
+    else:
+        texto_respuesta = """no se encuentras registros de  {}""".format(department_id)
+    
+    return HttpResponse(texto_respuesta)

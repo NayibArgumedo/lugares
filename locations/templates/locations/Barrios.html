@@ -1,35 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %} Lista de Barrios {% endblock %}
 
-    <h1>Lista de Barrio segun su ciudad : {{ciudad}} </h1>
+{% block title_content  %}
 
-    {% if display %}
+Lista de Barrio segun su ciudad : {{ciudad}}
+
+{%  endblock %}
+
+    {% block content  %}
+
+        {% if display %}
 
 
-    <div>
-        <div >
-            <ul> 
-                {% for b in barrio %}
-                    <li>
-                        
-                            {{ b }}
-                        
-                    </li>
-                {% endfor %}
-            </ul>
+        <div>
+            <div >
+                <ul> 
+                    {% for b in barrio %}
+                        <li>
+                            
+                                {{ b }}
+                            
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
-    </div>
-    {% else %}
-    <div>
-    No existen registros para mostrar
-    </div>
-    {% endif %}
+        {% else %}
+        <div>
+        No existen registros para mostrar
+        </div>
+        {% endif %}
+
+    {%  endblock %}
     
-</body>
-</html>

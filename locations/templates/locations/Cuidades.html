@@ -1,22 +1,32 @@
+{% extends 'base.html' %}
+{% block title %} Lista de Ciudades {% endblock %}
 
-<h1>Lista de ciudades segun el departamento : {{departamento}} </h1>
-{% if display %}
+{% block title_content  %}
 
-<div>
-    <div >
-        <ul> 
-            {% for c in ciudad %}
-                <li>
-                    
-                        {{ c }}
-                    
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-</div>
-{% else %}
-<div>
-    No existen registros para mostrar
-</div>
-{% endif %}
+Lista de ciudades segun el departamento : {{departamento}}
+
+{%  endblock %}
+
+    {% block content  %}
+        
+            {% if display %}
+
+            <div>
+                <div >
+                    <ul> 
+                        {% for c in ciudad %}
+                            <li>
+                                <a href="{% url 'app:barrios' departamento c %}">{{ c }}</a>
+                                    
+                                   
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% else %}
+            <div>
+                No existen registros para mostrar
+            </div>
+            {% endif %}
+    {%  endblock %}
