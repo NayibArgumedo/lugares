@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Lista de Barrio segun su ciudad : {{ciudad}} </h1>
+
+    {% if display %}
+
+
+    <div>
+        <div >
+            <ul> 
+                {% for b in barrio %}
+                    <li>
+                        
+                            {{ b }}
+                        
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% else %}
+    <div>
+    No existen registros para mostrar
+    </div>
+    {% endif %}
+    
+</body>
+</html>

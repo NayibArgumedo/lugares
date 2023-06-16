@@ -1,0 +1,22 @@
+
+<h1>Lista de ciudades segun el departamento : {{departamento}} </h1>
+{% if display %}
+
+<div>
+    <div >
+        <ul> 
+            {% for c in ciudad %}
+                <li>
+                    
+                        {{ c }}
+                    
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% else %}
+<div>
+    No existen registros para mostrar
+</div>
+{% endif %}
